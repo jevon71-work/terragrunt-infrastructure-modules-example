@@ -96,7 +96,8 @@ resource "aws_launch_configuration" "webserver_example" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "aws_security_group" "asg" {
-  name = "${var.name}-asg"
+  name   = "${var.name}-asg"
+  vpc_id = data.aws_vpc.default.id
 }
 
 resource "aws_security_group_rule" "asg_allow_http_inbound" {
@@ -141,7 +142,8 @@ resource "aws_elb" "webserver_example" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "aws_security_group" "elb" {
-  name = "${var.name}-elb"
+  name   = "${var.name}-elb"
+  vpc_id = data.aws_vpc.default.id
 }
 
 resource "aws_security_group_rule" "elb_allow_http_inbound" {
