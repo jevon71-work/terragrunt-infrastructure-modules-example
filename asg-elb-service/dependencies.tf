@@ -5,9 +5,25 @@
 # ---------------------------------------------------------------------------------------------------------------------
 
 data "aws_vpc" "default" {
-  default = true
+  default = false
 }
 
 data "aws_subnet_ids" "default" {
   vpc_id = data.aws_vpc.default.id
+}
+
+data "aws_subnet_ids" "private" {
+  vpc_id = data.aws_vpc.default.id
+
+  tags = {
+    Description = "private_subnet"
+  }
+}
+
+data "aws_subnet_ids" "public" {
+  vpc_id = data.aws_vpc.default.id
+
+  tags = {
+    Description = "public_subnet"
+  }
 }
