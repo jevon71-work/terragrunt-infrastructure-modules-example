@@ -49,7 +49,7 @@ resource "aws_autoscaling_group" "webserver_example" {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "aws_launch_configuration" "webserver_example" {
-  image_id        = data.aws_ami.ubuntu.id
+  image_id        = "ami-04effa29f4d91541f"
   instance_type   = var.instance_type
   security_groups = [aws_security_group.asg.id]
 
@@ -64,30 +64,30 @@ resource "aws_launch_configuration" "webserver_example" {
   }
 }
 
-data "aws_ami" "ubuntu" {
-  most_recent = true
-  owners      = ["099720109477"] # Canonical
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  filter {
-    name   = "architecture"
-    values = ["x86_64"]
-  }
-
-  filter {
-    name   = "image-type"
-    values = ["machine"]
-  }
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
-  }
-}
+# data "aws_ami" "ubuntu" {
+#   most_recent = true
+#   owners      = ["099720109477"] # Canonical
+#
+#   filter {
+#     name   = "virtualization-type"
+#     values = ["hvm"]
+#   }
+#
+#   filter {
+#     name   = "architecture"
+#     values = ["x86_64"]
+#   }
+#
+#   filter {
+#     name   = "image-type"
+#     values = ["machine"]
+#   }
+#
+#   filter {
+#     name   = "name"
+#     values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
+#   }
+# }
 
 # ---------------------------------------------------------------------------------------------------------------------
 # CREATE A SECURITY GROUP FOR THE ASG
